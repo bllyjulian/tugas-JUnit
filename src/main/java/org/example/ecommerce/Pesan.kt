@@ -1,19 +1,22 @@
 package org.example.ecommerce
 
+// Mendefinisikan kelas bernama Order
+class Order(private val produk: String, private val jumlah: Int) {
 
-class Order(private val product: String, private val quantity: Int) {
+    // Menunda inisialisasi properti warehouse
+    private lateinit var gudang: Warehouse
 
-    private lateinit var warehouse: Warehouse
+    // Properti untuk menunjukkan apakah pesanan sudah diisi atau belum
+    private var sudahDiisi: Boolean = false
 
-    private var isFilled: Boolean = false
-
-
-    fun fill(warehouse: Warehouse) {
-        this.warehouse = warehouse
-        isFilled = this.warehouse.remove(product, quantity)
+    // Fungsi untuk mengisi pesanan dari gudang
+    fun isi(gudang: Warehouse) {
+        this.gudang = gudang
+        sudahDiisi = this.gudang.hapus(produk, jumlah)
     }
 
-    fun isFilled(): Boolean {
-        return isFilled
+    // Fungsi untuk memeriksa apakah pesanan sudah diisi atau belum
+    fun sudahDiisi(): Boolean {
+        return sudahDiisi
     }
 }
